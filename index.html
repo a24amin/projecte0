@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joc de Marques</title>
+    <script type="module" src="js/script.js"></script> 
+    <link rel="stylesheet" href="css/style.css"> 
+    <style>
+        #salutacio { margin: 1rem 0; }
+        #formulariNom { margin: 1rem 0; }
+        #temps { font-weight: bolder; margin-top: 0.5rem; }
+    </style>
+</head>
+<body>
+    <h1>Pagina inicial</h1>
+
+    <div id="formulariNom">
+        <form id="formulari">
+            <label for="nom">Introdueix el teu nom:</label>
+            <input type="text" id="nom" required>
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <div id="salutacio" style="display:none;">
+        <p id="missatge"></p>
+        <button id="esborrarNom">Esborrar nom</button>
+    </div>
+
+    <div id="questionari"></div> 
+    <div id="marcador">Preguntes respostes: 0 de 0</div>
+
+    <div id="temps">Temps: 0s</div>
+
+    <button id="btnEnviar" class="hidden">Enviar Resultats</button>
+
+    <script>
+        const formulariContainer = document.getElementById('formulariNom');
+        const formulari = document.getElementById('formulari');
+        const inputNom = document.getElementById('nom');
+        const salutacio = document.getElementById('salutacio');
+        const missatge = document.getElementById('missatge');
+        const botoEsborrar = document.getElementById('esborrarNom');
+
+        // Funció per mostrar la salutació
+        function mostrarSalutacio(nom) {
+            formulariContainer.style.display = 'none';
+            salutacio.style.display = 'block';
+            missatge.textContent = `Hola, ${nom}!`;
+        }
+
+        // Comprovar si ja hi ha nom al localStorage
+        const nomGuardat = localStorage.getItem('nom');
+        if (nomGuardat) {
+            mostrarSalutacio(nomGuardat);
+        }
+
+        // Quan s'envia el formulari
+        formulari.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nom = inputNom.value.trim();
+            if (nom) {
+                localStorage.setItem('nom', nom);
+                mostrarSalutacio(nom);
+            }
+        });
+
+        // Quan es prem el botó d'esborrar
+        botoEsborrar.addEventListener('click', () => {
+            localStorage.removeItem('nom');
+            salutacio.style.display = 'none';
+            formulariContainer.style.display = 'block';
+            inputNom.value = '';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+{
+  "preguntes": [
+    {
+      "id": 1,
+      "pregunta": "Quina marca de cotxes utilitza el lema 'Ultimate Driving Machine'?",
+      "respostes": [
+        { "id": 1, "etiqueta": "BMW", "imatge": "./img/logobmw.jpeg" },
+        { "id": 2, "etiqueta": "Mercedes-Benz", "imatge": "./img/logomercedes.jpg" },
+        { "id": 3, "etiqueta": "Audi", "imatge": "./img/logoaudi.jpg" },
+        { "id": 4, "etiqueta": "Lexus", "imatge": "./img/logolexus.jpg" }
+      ],
+      "resposta_correcta": 1
+    },
+    {
+      "id": 2,
+      "pregunta": "Quina marca de refresc té el lema 'Open Happiness'?",
+      "respostes": [
+        { "id": 1, "etiqueta": "Pepsi", "imatge": "./img/logopepsi.jpg" },
+        { "id": 2, "etiqueta": "Fanta", "imatge": "./img/logofanta.jpg" },
+        { "id": 3, "etiqueta": "Coca-Cola", "imatge": "./img/logococacola.jpeg" },
+        { "id": 4, "etiqueta": "Sprite", "imatge": "./img/logosprite.jpeg" }
+      ],
+      "resposta_correcta": 3
+    },
+    {
+      "id": 3,
+      "pregunta": "Quina marca de roba té un logotip amb un cocodril?",
+      "respostes": [
+        { "id": 1, "etiqueta": "Lacoste", "imatge": "./img/logolacoste.jpeg" },
+        { "id": 2, "etiqueta": "Ralph Lauren", "imatge": "./img/logoralphlauren.jpeg" },
+        { "id": 3, "etiqueta": "Tommy Hilfiger", "imatge": "./img/logotommyhilfiger.jpeg" },
+        { "id": 4, "etiqueta": "Nike", "imatge": "./img/logonike.jpeg" }
+      ],
+      "resposta_correcta": 1
+    },
+    {
+      "id": 4,
+      "pregunta": "Quina marca de mòbils fa servir el logotip d'una poma mossegada?",
+      "respostes": [
+        { "id": 1, "etiqueta": "Samsung", "imatge": "./img/logosamsung.jpeg" },
+        { "id": 2, "etiqueta": "Xiaomi", "imatge": "./img/logoxiaomi.jpeg" },
+        { "id": 3, "etiqueta": "Apple", "imatge": "./img/logoapple.jpeg" },
+        { "id": 4, "etiqueta": "Huawei", "imatge": "./img/logohuawei.jpeg" }
+      ],
+      "resposta_correcta": 3
+    },
+    {
+      "id": 5,
+      "pregunta": "Quina marca de sabatilles és coneguda pel seu logotip de tres ratlles?",
+      "respostes": [
+        { "id": 1, "etiqueta": "Nike", "imatge": "./img/logonike.jpeg" },
+        { "id": 2, "etiqueta": "Adidas", "imatge": "./img/logoadidas.jpeg" },
+        { "id": 3, "etiqueta": "Puma", "imatge": "./img/logopuma.jpeg" },
+        { "id": 4, "etiqueta": "New Balance", "imatge": "./img/logonewbalance.jpeg" }
+      ],
+      "resposta_correcta": 2
+    },
+    {
+      "id": 6,
+      "pregunta": "Quina marca de cotxes utilitza un logotip amb quatre anells entrellaçats?",
+      "respostes": [
+        { "id": 1, "etiqueta": "Volkswagen", "imatge": "./img/logovolkswagen.jpeg" },
+        { "id": 2, "etiqueta": "Audi", "imatge": "./img/logoaudi.jpg" },
+        { "id": 3, "etiqueta": "Skoda", "imatge": "./img/logoskoda.jpeg" },
+        { "id": 4, "etiqueta": "Ford", "imatge": "./img/logoford.jpeg" }
+      ],
+      "resposta_correcta": 2
+    },
+    {
+      "id": 7,
+      "pregunta": "Quina marca de tecnologia utilitza el lema 'Just Do It'?",
+      "respostes": [
+        { "id": 1, "etiqueta": "Nike", "imatge": "./img/logonike.jpeg" },
+        { "id": 2, "etiqueta": "Sony", "imatge": "./img/logosony.jpeg" },
+        { "id": 3, "etiqueta": "Apple", "imatge": "./img/logoapple.jpeg" },
+        { "id": 4, "etiqueta": "Adidas", "imatge": "./img/logoadidas.jpeg" }
+      ],
+      "resposta_correcta": 1
+    },
+    {
+      "id": 8,
+      "pregunta": "Quina marca de cotxes té un logotip amb un cavall negre sobre fons groc?",
+      "respostes": [
+        { "id": 1, "etiqueta": "Lamborghini", "imatge": "./img/logolamborghini.jpeg" },
+        { "id": 2, "etiqueta": "Porsche", "imatge": "./img/logoporsche.jpeg" },
+        { "id": 3, "etiqueta": "Ferrari", "imatge": "./img/logoferrari.jpeg" },
+        { "id": 4, "etiqueta": "Maserati", "imatge": "./img/logomaserati.jpeg" }
+      ],
+      "resposta_correcta": 3
+    },
+    {
+      "id": 9,
+      "pregunta": "Quina marca de menjar ràpid té un logotip amb una 'M' groga?",
+      "respostes": [
+        { "id": 1, "etiqueta": "Burger King", "imatge": "./img/logoburgerking.jpeg" },
+        { "id": 2, "etiqueta": "Subway", "imatge": "./img/logosubway.jpeg" },
+        { "id": 3, "etiqueta": "McDonald's", "imatge": "./img/logomcdonalds.jpeg" },
+        { "id": 4, "etiqueta": "KFC", "imatge": "./img/logokfc.jpeg" }
+      ],
+      "resposta_correcta": 3
+    },
+    {
+      "id": 10,
+      "pregunta": "Quina marca de tecnologia té com a logotip quatre quadrats de colors?",
+      "respostes": [
+        { "id": 1, "etiqueta": "Google", "imatge": "./img/logogoogle.jpeg" },
+        { "id": 2, "etiqueta": "Microsoft", "imatge": "./img/logomicrosoft.jpeg" },
+        { "id": 3, "etiqueta": "Facebook", "imatge": "./img/logofacebook.jpeg" },
+        { "id": 4, "etiqueta": "Windows", "imatge": "./img/logowindows.jpeg" }
+      ],
+      "resposta_correcta": 2
+    }
+  ]
+}
