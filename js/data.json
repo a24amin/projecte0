@@ -1,7 +1,7 @@
 {
   "preguntes": [
     {
-      "id": 2,
+      "id": 1,
       "pregunta": "Quina marca de cotxes utilitza el lema 'Ultimate Driving Machine'?",
       "respostes": [
         { "id": 1, "etiqueta": "BMW", "imatge": "./img/logobmw.jpeg" },
