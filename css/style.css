@@ -1,0 +1,24 @@
+#salutacio {
+  margin: 1rem 0;
+}
+
+#formulariNom {
+  margin: 1rem 0;
+}
+
+#temps {
+  font-weight: bolder;
+  margin-top: 0.5rem;
+}
+
+.pregunta {
+  display: none;
+}
+
+.pregunta.activa {
+  display: block;
+}
+
+.nav-buttons {
+  margin-top: 1rem;
+}

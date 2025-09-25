@@ -4,19 +4,13 @@ require_once "connexio.php";
 
 $input = json_decode(file_get_contents('php://input'), true);
 
-if (!isset($input['respostes']) || !is_array($input['respostes'])) {
-    echo json_encode(["error" => "No se enviaron respuestas válidas"]);
-    exit;
-}
-
-$respostesUsuari = $input['respostes']; 
-
-if (empty($respostesUsuari)) {
-    echo json_encode(["puntuacio" => 0, "total" => 0]);
-    exit;
-}
+$respostesUsuari = $input['respostes'] ?? [];
 
 $puntuacio = 0;
+
+// Contar todas las preguntas de la BD
+$stmtPreg = $pdo->query("SELECT COUNT(*) as total FROM preguntes");
+$totalPreguntes = $stmtPreg->fetch(PDO::FETCH_ASSOC)['total'];
 
 foreach ($respostesUsuari as $r) {
     $pid = intval($r['pregunta_id']);
@@ -33,5 +27,5 @@ foreach ($respostesUsuari as $r) {
 
 echo json_encode([
     "puntuacio" => $puntuacio,
-    "total" => count($respostesUsuari)
+    "total" => $totalPreguntes
 ], JSON_PRETTY_PRINT);
