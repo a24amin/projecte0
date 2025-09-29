@@ -2,7 +2,6 @@ const mainContent = document.getElementById("main-content");
 const btnQuiz = document.getElementById("btnQuiz");
 const btnAdmin = document.getElementById("btnAdmin");
 
-// ----------------- Botón Quiz -----------------
 btnQuiz.addEventListener("click", ()=>{
     mainContent.innerHTML = "";
     const template = document.getElementById("quiz-template").content.cloneNode(true);
@@ -10,12 +9,10 @@ btnQuiz.addEventListener("click", ()=>{
     iniciarQuiz();
 });
 
-// ----------------- Botón Admin -----------------
 btnAdmin.addEventListener("click", ()=>{
     mainContent.innerHTML = `<iframe src="/projecte0/php/admin/admin.php" style="width:100%;height:80vh;border:none;"></iframe>`;
 });
 
-// ----------------- Función Quiz -----------------
 function iniciarQuiz() {
     const formulariContainer = document.getElementById('formulariNom');
     const formulari = document.getElementById('formulari');
@@ -79,7 +76,7 @@ function iniciarQuiz() {
                     <h3>${p.pregunta}</h3>
                     <div class="d-flex flex-wrap gap-2">
                         ${p.respostes.map(r=>`
-                            <button class="resposta btn btn-light border" data-p="${i}" data-id="${r.id}" data-pid="${r.idReal}">
+                            <button class="resposta btn btn-light border" data-p="${i}" data-id="${r.id}" data-pid="${r.pregunta_id}">
                                 <img src="/projecte0/${r.imatge}" alt="${r.etiqueta}" style="height:80px;">
                             </button>
                         `).join('')}
