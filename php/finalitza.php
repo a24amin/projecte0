@@ -8,7 +8,6 @@ $respostesUsuari = $input['respostes'] ?? [];
 
 $puntuacio = 0;
 
-// Contar todas las preguntas de la BD
 $stmtPreg = $pdo->query("SELECT COUNT(*) as total FROM preguntes");
 $totalPreguntes = $stmtPreg->fetch(PDO::FETCH_ASSOC)['total'];
 
