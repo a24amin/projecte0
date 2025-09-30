@@ -1,4 +1,4 @@
-# Joc de Marques - Projecte 0 2DAW 2025-26 Amin Oulad
+# Joc de Marques - Projecte 0 2DAW 2025-26 Amin 
 
 ## Objectiu del Projecte
 Aquest projecte és un **quiz interactiu de marques amb imatges** desenvolupat amb HTML, CSS, JavaScript, PHP i MySQL. L’objectiu és oferir una experiència educativa i divertida on l’usuari ha de reconèixer marques a través d’imatges i etiquetes.
