@@ -1,89 +1,142 @@
 <?php
 require_once "../connexio.php";
 
+$uploadDir = '../img/'; // Carpeta on es guardaran les imatges
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // CREAR NOVA PREGUNTA
+    if (isset($_POST['nova_pregunta'])) {
+        $stmt = $pdo->prepare("INSERT INTO preguntes (pregunta) VALUES (:pregunta)");
+        $stmt->execute(['pregunta' => $_POST['nova_pregunta']]);
+        $pregunta_id = $pdo->lastInsertId();
+
+        $respostes_text = $_POST['resposta_text'];
+        $correcta = intval($_POST['correcta']);
+
+        // Gestionar imatges pujant-les
+        for ($i = 0; $i < 4; $i++) {
+            $imatgeNom = '';
+            if (isset($_FILES['resposta_img']['name'][$i]) && $_FILES['resposta_img']['error'][$i] === UPLOAD_ERR_OK) {
+                $tmpName = $_FILES['resposta_img']['tmp_name'][$i];
+                $imatgeNom = basename($_FILES['resposta_img']['name'][$i]);
+                move_uploaded_file($tmpName, $uploadDir . $imatgeNom);
+            }
+
+            $stmt = $pdo->prepare("INSERT INTO respostes (pregunta_id, etiqueta, imatge, correcta) VALUES (:pid,:etiqueta,:imatge,:correcta)");
+            $stmt->execute([
+                'pid' => $pregunta_id,
+                'etiqueta' => $respostes_text[$i],
+                'imatge' => 'img/' . $imatgeNom,
+                'correcta' => ($i + 1 === $correcta ? 1 : 0)
+            ]);
+        }
+    }
+
+    // EDITAR PREGUNTA
+    if (isset($_POST['editar_pregunta_id'])) {
+        $stmt = $pdo->prepare("UPDATE preguntes SET pregunta=:pregunta WHERE id=:id");
+        $stmt->execute([
+            'pregunta' => $_POST['editar_pregunta_text'],
+            'id' => $_POST['editar_pregunta_id']
+        ]);
+    }
+
+    // EDITAR RESPOSTES
+    if (isset($_POST['editar_resposta_ids'])) {
+        $correcta = intval($_POST['editar_correcta']);
+        $ids = $_POST['editar_resposta_ids'];
+        $texts = $_POST['editar_resposta_text'];
+
+        for ($i = 0; $i < count($ids); $i++) {
+            $imatgeNom = '';
+            if (isset($_FILES['editar_resposta_img']['name'][$i]) && $_FILES['editar_resposta_img']['error'][$i] === UPLOAD_ERR_OK) {
+                $tmpName = $_FILES['editar_resposta_img']['tmp_name'][$i];
+                $imatgeNom = basename($_FILES['editar_resposta_img']['name'][$i]);
+                move_uploaded_file($tmpName, $uploadDir . $imatgeNom);
+            }
+
+            $stmt = $pdo->prepare("UPDATE respostes SET etiqueta=:etiqueta, imatge=:imatge, correcta=:correcta WHERE id=:id");
+            $stmt->execute([
+                'etiqueta' => $texts[$i],
+                'imatge' => $imatgeNom ? 'img/' . $imatgeNom : $_POST['editar_resposta_img_old'][$i],
+                'correcta' => ($i + 1 == $correcta ? 1 : 0),
+                'id' => $ids[$i]
+            ]);
+        }
+    }
+
+    // ELIMINAR PREGUNTA I RESPOSTES
     if (isset($_POST['eliminar_id'])) {
         $stmt = $pdo->prepare("DELETE FROM respostes WHERE pregunta_id=:id");
-        $stmt->execute(['id'=>$_POST['eliminar_id']]);
+        $stmt->execute(['id' => $_POST['eliminar_id']]);
         $stmt2 = $pdo->prepare("DELETE FROM preguntes WHERE id=:id");
-        $stmt2->execute(['id'=>$_POST['eliminar_id']]);
-    } elseif (isset($_POST['editar_id'])) {
-        $stmt = $pdo->prepare("UPDATE preguntes SET pregunta=:pregunta WHERE id=:id");
-        $stmt->execute(['pregunta'=>$_POST['editar_pregunta'], 'id'=>$_POST['editar_id']]);
-        foreach($_POST['id_resp'] as $i=>$idr){
-            $texto = $_POST['respuestas'][$i];
-            $correcta = ($i==$_POST['correcta']-1)?1:0;
-            $stmt2 = $pdo->prepare("UPDATE respostes SET etiqueta=:etiqueta, correcta=:correcta WHERE id=:id");
-            $stmt2->execute(['etiqueta'=>$texto,'correcta'=>$correcta,'id'=>$idr]);
-        }
-    } elseif (isset($_POST['pregunta'])) {
-        $stmt = $pdo->prepare("INSERT INTO preguntes (pregunta) VALUES (:pregunta)");
-        $stmt->execute(['pregunta'=>$_POST['pregunta']]);
-        $idPregunta = $pdo->lastInsertId();
-        for ($i=0;$i<4;$i++){
-            $texto = $_POST['respuestas'][$i];
-            $correcta = ($i==$_POST['correcta']-1)?1:0;
-            $stmt2 = $pdo->prepare("INSERT INTO respostes (pregunta_id, etiqueta, correcta) VALUES (:pid,:etiqueta,:correcta)");
-            $stmt2->execute(['pid'=>$idPregunta,'etiqueta'=>$texto,'correcta'=>$correcta]);
-        }
+        $stmt2->execute(['id' => $_POST['eliminar_id']]);
     }
 
     header("Location: admin.php");
     exit;
 }
 
-$preguntas = $pdo->query("SELECT * FROM preguntes ORDER BY id DESC")->fetchAll();
+// Recupera totes les preguntes
+$preguntes = $pdo->query("SELECT * FROM preguntes ORDER BY id DESC")->fetchAll();
 ?>
 
 <!DOCTYPE html>
 <html lang="ca">
 <head>
 <meta charset="UTF-8">
-<title>Admin Quiz Simple</title>
-<style>
-body{font-family:sans-serif;padding:20px;}
-h1{text-align:center;}
-form{margin-bottom:20px;border:1px solid #ccc;padding:10px;border-radius:6px;}
-input[type=text]{width:100%;padding:6px;margin-bottom:5px;}
-button{padding:6px 12px;margin-top:5px;cursor:pointer;}
-.question{border-top:1px solid #ccc;padding:5px 0;}
-.actions{margin-top:5px;}
-</style>
+<title>Admin Quiz</title>
 </head>
 <body>
+<h1>⚙️ Admin Quiz</h1>
 
-<h1>Gestor de Preguntes</h1>
-
-<h2>Crear pregunta nova</h2>
-<form method="POST">
-    <input type="text" name="pregunta" placeholder="Pregunta..." required><br>
-    <?php for($i=0;$i<4;$i++): ?>
-        <input type="text" name="respuestas[]" placeholder="Resposta <?= $i+1 ?>" required>
-        <input type="radio" name="correcta" value="<?= $i+1 ?>" <?= $i==0?'checked':'' ?>> Correcta<br>
+<!-- Crear nova pregunta -->
+<div class="card">
+<h2>Crear nova pregunta</h2>
+<form method="POST" enctype="multipart/form-data">
+    <input type="text" name="nova_pregunta" placeholder="Pregunta..." required><br>
+    <?php for($i=1;$i<=4;$i++): ?>
+        <input type="text" name="resposta_text[]" placeholder="Resposta <?=$i?>" required>
+        <input type="file" name="resposta_img[]" accept="image/*" required>
+        <input type="radio" name="correcta" value="<?=$i?>" <?=($i==1?'checked':'')?>> Correcta<br>
     <?php endfor; ?>
-    <button type="submit">Crear</button>
+    <button type="submit" class="btn btn-green">Crear pregunta</button>
 </form>
+</div>
 
+<!-- Preguntes existents -->
+<div class="card">
 <h2>Preguntes existents</h2>
-<?php foreach($preguntas as $p): 
-    $res = $pdo->prepare("SELECT * FROM respostes WHERE pregunta_id=:pid ORDER BY id ASC");
-    $res->execute(['pid'=>$p['id']]);
-    $respuestas = $res->fetchAll();
+<?php foreach($preguntes as $p):
+    $respostes = $pdo->prepare("SELECT * FROM respostes WHERE pregunta_id=:pid ORDER BY id ASC");
+    $respostes->execute(['pid'=>$p['id']]);
+    $respostes = $respostes->fetchAll();
 ?>
-<form method="POST" class="question">
-    <input type="hidden" name="editar_id" value="<?= $p['id'] ?>">
-    <input type="text" name="editar_pregunta" value="<?= htmlspecialchars($p['pregunta']) ?>"><br>
-    <?php foreach($respuestas as $i=>$r): ?>
-        <input type="hidden" name="id_resp[]" value="<?= $r['id'] ?>">
-        <input type="text" name="respuestas[]" value="<?= htmlspecialchars($r['etiqueta']) ?>">
-        <input type="radio" name="correcta" value="<?= $i+1 ?>" <?= $r['correcta']?'checked':'' ?>> Correcta<br>
-    <?php endforeach; ?>
-    <div class="actions">
-        <button type="submit">Desa canvis</button>
-        <button type="submit" name="eliminar_id" value="<?= $p['id'] ?>" onclick="return confirm('Segur que vols eliminar?');">Elimina</button>
-    </div>
-</form>
+<div class="card">
+    <form method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="editar_pregunta_id" value="<?= $p['id'] ?>">
+        <input type="text" name="editar_pregunta_text" value="<?= htmlspecialchars($p['pregunta']) ?>" required>
+        <div>
+            <?php foreach($respostes as $i => $r): ?>
+                <div class="resposta">
+                    <input type="hidden" name="editar_resposta_ids[]" value="<?= $r['id'] ?>">
+                    <input type="text" name="editar_resposta_text[]" value="<?= htmlspecialchars($r['etiqueta']) ?>" required>
+                    <input type="hidden" name="editar_resposta_img_old[]" value="<?= htmlspecialchars($r['imatge']) ?>">
+                    <input type="file" name="editar_resposta_img[]" accept="image/*">
+                    <input type="radio" name="editar_correcta" value="<?= $i+1 ?>" <?=($r['correcta']==1?'checked':'')?>> Correcta
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <button type="submit" class="btn btn-blue">Desa canvis</button>
+    </form>
+    <form method="POST" style="display:inline;">
+        <input type="hidden" name="eliminar_id" value="<?= $p['id'] ?>">
+        <button class="btn btn-red" onclick="return confirm('Segur que vols eliminar?');">Eliminar</button>
+    </form>
+</div>
 <?php endforeach; ?>
+</div>
 
 </body>
 </html>
