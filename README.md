@@ -35,3 +35,5 @@ Aquest projecte s’alinea amb l’**ODS 4: Educació de qualitat**, ja que prom
 - Comentaris clars a la lògica complexa.
 - Gestió de versions amb **branques i commits regulars**.
 - Analitzat amb **SonarCloud** per assegurar estàndards de qualitat.
+
+<img width="1266" height="648" alt="Captura de pantalla de 2025-10-01 10-47-49" src="https://github.com/user-attachments/assets/7516c691-fbbe-4e06-9471-9ab7f5fb6f99" />
