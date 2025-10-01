@@ -1,49 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Joc de Marques</title>
-<link rel="stylesheet" href="/projecte0/css/style.css">
-<script type="module" src="/projecte0/js/script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joc de Marques</title>
+    <link rel="stylesheet" href="/projecte0/css/style.css">
+    <script  src="/projecte0/js/script.js"></script>
 </head>
+
 <body class="container py-3">
+    <h1 class="text-center">Joc de Marques</h1> 
 
-<h1 class="text-center">Joc de Marques</h1>
-
-<div class="d-flex justify-content-center gap-2 mb-3">
-    <button id="btnQuiz" class="btn btn-primary">Comença el Quiz</button>
-    <button id="btnAdmin" class="btn btn-secondary">Admin</button>
-</div>
-
-<div id="main-content"></div>
-
-<template id="quiz-template">
-    <div id="formulariNom" class="mb-3">
-        <form id="formulari" class="d-flex gap-2">
-            <input type="text" id="nom" class="form-control" placeholder="Introdueix el teu nom" required>
-            <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
+    <div class="d-flex justify-content-center gap-2 mb-3"> <!-- // Contenidor amb els botons principals -->
+        <button id="btnQuiz" class="btn btn-primary">Comença el Quiz</button>
+        <!-- // Botó per iniciar el qüestionari -->
+        <button id="btnAdmin" class="btn btn-secondary">Admin</button>
+        <!-- // Botó per accedir a la part d’administració -->
     </div>
 
-    <div id="salutacio" style="display:none;" class="mb-3">
-        <p id="missatge"></p>
-        <button id="esborrarNom" class="btn btn-secondary">Esborrar nom</button>
-    </div>
+    <div id="main-content"></div> <!-- // Aquí es carregarà dinàmicament el contingut amb JS -->
 
-    <div id="questionari" class="mb-3"></div>
+    <!-- // Plantilla oculta que s’inserirà amb JS quan l’usuari comenci el quiz -->
+    <template id="quiz-template">
+        <!-- // Formulari per introduir el nom de l’usuari -->
+        <div id="formulariNom" class="mb-3">
+            <form id="formulari" class="d-flex gap-2">
+                <input type="text" id="nom" class="form-control" placeholder="Introdueix el teu nom" required>
+                <!-- // Camp de text obligatori -->
+                <button type="submit" class="btn btn-primary">Enviar</button> <!-- // Botó per enviar el nom -->
+            </form>
+        </div>
 
-    <div id="marcador" class="fw-bold">Preguntes respostes: 0 de 0</div>
-    <div id="temps">Temps: 0s</div>
+        <!-- // Secció de salutació que apareix després d’enviar el nom -->
+        <div id="salutacio" style="display:none;" class="mb-3">
+            <p id="missatge"></p> <!-- // Aquí es mostrarà “Hola, [nom]” -->
+            <button id="esborrarNom" class="btn btn-secondary">Esborrar nom</button>
+            <!-- // Botó per esborrar el nom i tornar al formulari -->
+        </div>
 
-    <div class="nav-buttons d-flex justify-content-between">
-        <button id="btnAnterior" class="btn btn-outline-primary">Anterior</button>
-        <button id="btnSeguent" class="btn btn-outline-primary">Següent</button>
-    </div>
+        <!-- // Aquí es mostraran les preguntes del qüestionari -->
+        <div id="questionari" class="mb-3"></div>
 
-    <button id="btnEnviar" class="btn btn-success mt-3 hidden">Enviar Resultats</button>
-    <div id="resultat" class="mt-3 fw-bold"></div>
-</template>
+        <!-- // Marcador de quantes preguntes portes -->
+        <div id="marcador" class="fw-bold">Preguntes respostes: 0 de 0</div>
+        <div id="temps">Temps: 0s</div> <!-- // Temporitzador del quiz -->
 
+        <!-- // Botons per navegar entre preguntes -->
+        <div class="nav-buttons d-flex justify-content-between">
+            <button id="btnAnterior" class="btn btn-outline-primary">Anterior</button>
+            <button id="btnSeguent" class="btn btn-outline-primary">Següent</button>
+        </div>
+
+        <!-- // Botó per enviar les respostes (ocult fins que es contesten totes) -->
+        <button id="btnEnviar" class="btn btn-success mt-3 hidden">Enviar Resultats</button>
+
+        <!-- // Aquí es mostrarà la puntuació final -->
+        <div id="resultat" class="mt-3 fw-bold"></div>
+    </template>
 </body>
 </html>
