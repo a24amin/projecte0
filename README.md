@@ -11,7 +11,7 @@ Aquest projecte s’alinea amb l’**ODS 4: Educació de qualitat**, ja que prom
 ---
 
 ## Tecnologies Utilitzades
-- **Frontend:** HTML, CSS, JavaScript
+- **Frontend:** HTML, CSS, JavaScript.
 - **Backend:** PHP
 - **Base de dades:** MySQL
 - **Control de versions:** Git / GitHub (amb branques i commits regulars)
