@@ -4,22 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Joc de Marques</title>
+
+  <!-- Full d'estils principal -->
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- Bootstrap CSS per disseny i components responsius -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
-<body class="container py-3">
-
-  <h1 class="text-center mb-4">Joc de Marques</h1>
-
-  <div class="d-flex justify-content-center gap-2 mb-3 flex-wrap">
-    <button id="btnQuiz" class="btn btn-primary flex-fill flex-md-auto">Comença el Quiz</button>
-    <button id="btnAdmin" class="btn btn-secondary flex-fill flex-md-auto">Admin</button>
+<body>  
+  <div id="landing">
+    <h1 class="mb-4">Joc de Marques</h1>
+    <div class="d-flex justify-content-center gap-2 flex-wrap">
+      <!-- Botó per iniciar el quiz -->
+      <button id="btnQuiz" class="btn btn-primary flex-fill flex-md-auto">Comença el Quiz</button>
+      <!-- Botó per accedir a la pàgina d'administració -->
+      <button id="btnAdmin" class="btn btn-secondary flex-fill flex-md-auto">Admin</button>
+    </div>
   </div>
 
-  <div id="main-content" class="w-100"></div>
+  <!-- Aquí es carregarà tot el contingut dinàmic (quiz, admin, etc.)
+       Inicialment està ocult
+  -->
+  <div id="main-content" class="w-100" style="display:none"></div>
 
+  <!-- Aquesta plantilla s'utilitza per clonar i mostrar la interfície del quiz
+       Conté el formulari de nom, salutació, preguntes, marcador, temporitzador
+       i botons de navegació i enviament de resultats
+  -->
   <template id="quiz-template">
+    <!-- Formulari per introduir el nom de l'usuari -->
     <div id="formulariNom" class="mb-3 w-100">
       <form id="formulari" class="d-flex gap-2 flex-wrap justify-content-center">
         <input type="text" id="nom" class="form-control flex-fill flex-md-auto" placeholder="Introdueix el teu nom" required>
@@ -27,29 +40,35 @@
       </form>
     </div>
 
+    <!-- Salutació personalitzada quan l'usuari ja ha introduït el nom -->
     <div id="salutacio" style="display:none;" class="mb-3 text-center w-100">
       <p id="missatge" class="fw-bold"></p>
       <button id="esborrarNom" class="btn btn-secondary">Esborrar nom</button>
     </div>
 
+    <!-- Contenidor on es mostraran les preguntes i respostes del quiz -->
     <div id="questionari" class="mb-3 w-100"></div>
 
+    <!-- Marcador i temporitzador -->
     <div class="d-flex justify-content-between fw-bold mb-2 flex-wrap">
       <div id="marcador">Preguntes respostes: 0 de 0</div>
       <div id="temps">Temps: 0s</div>
     </div>
 
+    <!-- Botons de navegació entre preguntes -->
     <div class="nav-buttons d-flex justify-content-between flex-wrap mb-2">
       <button id="btnAnterior" class="btn btn-outline-primary flex-fill flex-md-auto mb-1">Anterior</button>
       <button id="btnSeguent" class="btn btn-outline-primary flex-fill flex-md-auto mb-1">Següent</button>
     </div>
 
+    <!-- Botó per enviar els resultats al backend -->
     <button id="btnEnviar" class="btn btn-success mt-3 hidden w-100">Enviar Resultats</button>
+
+    <!-- Contenidor on es mostrarà el resultat final del quiz -->
     <div id="resultat" class="mt-3 fw-bold text-center w-100"></div>
   </template>
 
   <script src="js/script.js"></script>
-  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
