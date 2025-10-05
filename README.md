@@ -42,6 +42,6 @@ Aquest projecte s’alinea amb l’**ODS 4: Educació de qualitat**, ja que prom
 - Link: projecte0.vercel.app
 - Imatge:
 
-<img width="1266" height="648" alt="Captura de pantalla de 2025-10-01 10-47-49" src="https://github.com/user-attachments/assets/7516c691-fbbe-4e06-9471-9ab7f5fb6f99" />
+<img width="1876" height="880" alt="Captura de Vercel" src="https://github.com/user-attachments/assets/b3c62de1-1b43-44c0-9fbb-86f7f5b9b6c9" />
 
 ---
