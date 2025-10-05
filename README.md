@@ -52,4 +52,7 @@ Aquest projecte s’alinea amb l’**ODS 4: Educació de qualitat**, ja que prom
 
   <img width="1883" height="872" alt="Captura de SonarCloud" src="https://github.com/user-attachments/assets/cd026ec1-d69d-4598-9e87-7ad6f2f62be8" />
 
+---
 
+## Video Youtube
+- Link: https://youtu.be/l5M9M-q803k
