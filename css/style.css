@@ -1,129 +1,170 @@
-/* Contenidor Principal */
-body.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1rem;
+/* Reset i altura completa de la pàgina */
+html, body {
+  height: 100%; /* assegura que la pàgina ocupi tota l'altura de la finestra */
+  margin: 0;    /* elimina marges per defecte */
+  font-family: Georgia, 'Times New Roman', Times, serif; /* font general */
+  background-color: #f8f9fa; /* color de fons clar */
 }
 
-/* Formulari Nom */
+/* Contenidor principal de la pàgina */
+body.container {
+  max-width: 1200px; /* amplada màxima del contenidor */
+  margin: 0 auto;    /* centra horitzontalment */
+  padding: 1rem;     /* espai interior */
+}
+
+/* Landing centrada amb text i botons */
+#landing {
+  height: 100vh;             /* ocupa tota l'altura de la finestra */
+  display: flex;
+  flex-direction: column;    /* col·loca elements en columna */
+  justify-content: center;   /* centra verticalment */
+  align-items: center;       /* centra horitzontalment */
+  text-align: center;        /* alinea text al centre */
+}
+
+/* Títol principal del landing */
+#landing h1 {
+  font-size: 3rem;     /* mida de la font gran */
+  margin-bottom: 30px; /* espai inferior respecte els botons */
+}
+
+/* Botons de la landing */
+#landing button {
+  min-width: 150px;      /* amplada mínima */
+  padding: 10px 20px;    /* espai interior */
+  font-size: 1.2rem;     /* mida de la font */
+  cursor: pointer;       /* canvia el cursor a punter */
+}
+
+/* Classe per ocultar elements */
+.hidden {
+  display: none !important; /* força ocultació independent del display anterior */
+}
+
+/* Contingut principal del quiz/admin ocult inicialment */
+#main-content {
+  display: none;        /* no es mostra fins que es carregui quiz o admin */
+  padding: 2rem 1rem;   /* espai interior */
+}
+
+/* Formulari d'entrada del nom */
 #formulariNom form {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
+  flex-wrap: wrap;       /* permet que els elements facin salt de línia si cal */
+  gap: 10px;             /* separació entre elements */
+  justify-content: center; /* centra el formulari horitzontalment */
 }
 
+/* Input del nom */
 #nom {
-  flex: 1 1 200px; /* flexible amb mínim 200px */
+  flex: 1 1 200px; /* ocupa espai flexible amb mínim 200px */
 }
 
+/* Botons dins del formulari */
 #formulari button {
-  flex: 0 0 auto;
+  flex: 0 0 auto; /* no creix ni es redueix */
 }
 
-/* Salutació */
+/* Salutació després d'introduir el nom */
 #salutacio {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 20px; /* separació inferior */
 }
 
+/* Botó dins de la salutació */
 #salutacio button {
-  margin-top: 10px;
+  margin-top: 10px; /* separació superior */
 }
 
-/* Preguntes i Respostes */
+/* Contenidor d'una pregunta */
 .pregunta {
-  margin-bottom: 20px;
+  margin-bottom: 20px;      /* separació inferior entre preguntes */
+  display: flex;
+  flex-direction: column;   /* pregunta i respostes en columna */
+  align-items: center;      /* centra horitzontalment */
+  width: 100%;              /* ocupa tot l'ample del contenidor */
 }
 
+/* Text de la pregunta */
 .pregunta h3 {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-  text-align: center;
+  font-size: 1.2rem; /* mida de la font per la pregunta */
+  margin-bottom: 20px; /* separació respecte les respostes */
+  text-align: center;   /* centra el text */
+  width: 100%;          /* ocupa tot l'ample */
 }
 
-.pregunta .resposta {
-  flex: 1 1 120px; /* ocupa espai proporcional amb mínim */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.pregunta .resposta img {
+/* Contenidor de respostes */
+.pregunta .respuestas-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnes a l'escriptori */
+  gap: 20px; /* separació entre respostes */
+  justify-items: center; /* centra les respostes dins cada cel·la */
   width: 100%;
-  height: auto;
-  max-height: 100px;
-  object-fit: contain;
 }
 
-/* Contenidor de les respostes */
-#questionari {
+/* Cada resposta individual */
+.pregunta .resposta {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  flex-direction: column; /* text i imatge en columna */
+  align-items: center;    /* centra horitzontalment */
   justify-content: center;
+  gap: 5px;               /* separació entre elements dins de la resposta */
+  text-align: center;
+  width: 100%;
+  max-width: 150px;       /* amplada màxima per a cada resposta */
+}
+
+/* Imatge dins de la resposta */
+.pregunta .resposta img {
+  width: 100%;       /* ocupa tota l'amplada del contenidor */
+  height: auto;
+  max-height: 100px; /* altura màxima */
+  object-fit: contain; /* manté proporció sense retallar */
+}
+
+/* Estils per mòbil: resposta 2x2 en quadrat */
+@media (max-width: 768px) {
+  .pregunta .respuestas-container {
+    grid-template-columns: repeat(2, 1fr); /* dues columnes */
+    grid-template-rows: repeat(2, auto);   /* dues files */
+    justify-items: center;
+    gap: 15px; /* menys separació */
+  }
+  .pregunta .resposta {
+    max-width: 100px; /* més petites per mòbil */
+  }
 }
 
 /* Navegació entre preguntes */
 .nav-buttons {
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
+  justify-content: space-between; /* botons separats */
+  flex-wrap: wrap; /* permet que saltin de línia si cal */
+  gap: 10px;       /* separació entre botons */
 }
 
+/* Botons de navegació */
 .nav-buttons button {
-  flex: 1 1 45%; /* cada botó ocupa gairebé la meitat */
+  flex: 1 1 45%; /* ocupa quasi la meitat de l'amplada */
 }
 
-/* Botó Enviar Resultats */
+/* Botó d'enviar respostes */
 #btnEnviar {
   width: 100%;
   max-width: 300px;
-  margin: 15px auto;
+  margin: 15px auto; /* centrat horitzontalment amb marge superior */
   display: block;
 }
 
-/* Marcador i Temporitzador */
-#marcador,
-#temps {
+/* Marcador i comptador de temps */
+#marcador, #temps {
   text-align: center;
   font-weight: bold;
-  margin: 10px 0;
+  margin: 10px 0; /* separació vertical */
 }
 
-/* Admin Panel */
-iframe {
-  width: 100%;
-  max-width: 100%;
-  height: 80vh;
-  border: none;
-}
-
-/* General */
-.hidden {
-  display: none !important;
-}
-
-button {
-  cursor: pointer;
-}
-
-/* Mida màxima per pantalla gran */
-body.container {
-  max-width: 1200px;
-}
-
-/* Ajustaments fluidos automàtics */
-#main-content,
-#questionari,
-#formulariNom,
-#salutacio {
-  width: 90%;
-  max-width: 900px;
-  margin: 0 auto;
+.pregunta .resposta img:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease-in-out;
 }
