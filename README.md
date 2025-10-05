@@ -45,3 +45,11 @@ Aquest projecte s’alinea amb l’**ODS 4: Educació de qualitat**, ja que prom
 <img width="1876" height="880" alt="Captura de Vercel" src="https://github.com/user-attachments/assets/b3c62de1-1b43-44c0-9fbb-86f7f5b9b6c9" />
 
 ---
+
+## SonarCloud Screenshot & Link
+- Link: https://sonarcloud.io/project/overview?id=a24amin_projecte0
+- Imatge:
+
+  <img width="1883" height="872" alt="Captura de SonarCloud" src="https://github.com/user-attachments/assets/cd026ec1-d69d-4598-9e87-7ad6f2f62be8" />
+
+
