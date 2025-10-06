@@ -55,4 +55,4 @@ Aquest projecte s’alinea amb l’**ODS 4: Educació de qualitat**, ja que prom
 ---
 
 ## Video Youtube
-- Link: https://youtu.be/l5M9M-q803k
+- Link: https://www.youtube.com/watch?v=GjtfgH5rceM
